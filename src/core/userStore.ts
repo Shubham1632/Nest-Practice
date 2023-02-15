@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-type User = {
+export type User = {
   id: string;
   email: string;
   password: string;
@@ -8,15 +8,20 @@ type User = {
 
 @Injectable()
 export class UserStore {
-  users: User[];
+  users: User[] = [];
 
-  save(user: User) {
+  save(user: User): User {
     this.users.push(user);
+    return user;
   }
+
   get(): User[] {
     return this.users;
   }
   getById(id: string): User {
     return this.users.find((user) => user.id == id);
+  }
+  getByEmail(email: string): User {
+    return this.users.find((user) => user.email == email);
   }
 }

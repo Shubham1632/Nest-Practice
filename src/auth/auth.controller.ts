@@ -6,7 +6,12 @@ import { Auth } from './auth';
 export class AuthController {
   constructor(private authSevice: Auth) {}
   @Post('/signup')
-  signup(@Body() authbody: authDTO): authDTO {
-    return this.authSevice.signin(authbody);
+  async signup(@Body() authbody: authDTO): Promise<authDTO> {
+    return await this.authSevice.signup(authbody);
+  }
+
+  @Post('/signin')
+  async signin(@Body() authBody: authDTO): Promise<string> {
+    return await this.authSevice.signin(authBody);
   }
 }
