@@ -1,9 +1,11 @@
 import { Controller, Get } from '@nestjs/common';
+import { User, UserStore } from 'src/core/userStore';
 
 @Controller('/user')
 export class UserController {
+  constructor(private userStore: UserStore) {}
   @Get()
-  getuser(): string {
-    return 'Hello user';
+  getuser(): User[] {
+    return this.userStore.get();
   }
 }
